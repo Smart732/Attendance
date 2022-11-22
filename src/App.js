@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 function App() {
+  const [set ,setiem]=useState(false)
   const [Attendance, setAttendance] = useState({
     P_no: "",
     Date: "",
@@ -21,7 +22,12 @@ function App() {
     };
 
     axios.request(options).then(function (response) {
-      console.log(response);
+      console.log(response.status);
+      if(response.status==245){
+        setiem({set:response.status})
+        console.log(set)
+      }
+      console.log(response.data);
     }).catch(function (error) {
       console.error(error);
     });
