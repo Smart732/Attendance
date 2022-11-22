@@ -5,7 +5,8 @@ function App() {
     P_no: "",
     Date: "",
     Timein: "",
-    Timeout: ""
+    Timeout: "",
+    Month:""
   })
   const clickhandal = (e) => {
     setAttendance({ ...Attendance, [e.target.name]: e.target.value });
@@ -20,7 +21,7 @@ function App() {
     };
 
     axios.request(options).then(function (response) {
-      console.log(response.data);
+      console.log(response);
     }).catch(function (error) {
       console.error(error);
     });
@@ -28,10 +29,12 @@ function App() {
   return (
     <><div className='container'>
       <div className='h1 text-center text-primary mt-2'>Today Attendance</div>
-      <label className="form-label">Choose Date</label>
-      <input className="form-control" type="date" name="Date" onChange={clickhandal} value={Attendance.Date} /><br />
       <label className="form-label">Enter P_no</label>
       <input className="form-control" type="number" name="P_no" onChange={clickhandal} value={Attendance.P_no} /><br />
+      <label className="form-label">Choose Month</label>
+      <input className="form-control" name='Month' type="month" onChange={clickhandal} value={Attendance.Month}/><br />
+      <label className="form-label">Choose Date</label>
+      <input className="form-control" type="date" name="Date" onChange={clickhandal} value={Attendance.Date} /><br />
       <label className="form-label"> Choose Timein</label>
       <input className="form-control" type="time" name="Timein" onChange={clickhandal} value={Attendance.Timein} /><br />
       <label className="form-label"> Choose Timeout</label>
