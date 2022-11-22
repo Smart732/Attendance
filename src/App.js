@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useState } from 'react'
 function App() {
   const [set, setiem] = useState(false)
+  const [fill, setfill] = useState(false)
+  const [insert, setinsert] = useState(false)
   const [Attendance, setAttendance] = useState({
     P_no: "",
     Date: "",
@@ -13,8 +15,7 @@ function App() {
     setAttendance({ ...Attendance, [e.target.name]: e.target.value });
   }
   const handalsumit = () => {
-    setiem(!set)
-
+  
     const options = {
       method: 'POST',
       url: 'https://7yv9hj.deta.dev/att/todayatt',
@@ -25,12 +26,29 @@ function App() {
       console.log(response.status);
       if (response.status === 211) {
         setiem(true)
+        setinsert(false);
+        setfill(false);
         setTimeout(hide, 1000);
         function hide(){
           document.getElementById("hide").style.display = "none";
         }
       }
-      console.log(response.data);
+      else if(response.status===200){
+        setiem(false)
+        setinsert(true);
+        setfill(false)
+        setTimeout(hide1, 1000);
+        function hide1(){
+          document.getElementById("hide1").style.display = "none";
+      }
+    }else if(response.status===212){
+      setiem(false)
+        setinsert(false);
+        setfill(true);
+      setTimeout(hide2, 1000);
+        function hide2(){
+          document.getElementById("hide2").style.display = "none";
+    }}
     }).catch(function (error) {
       console.error(error);
     });
@@ -39,6 +57,14 @@ function App() {
     <><div className='container'>
      {set?<div id="hide"className="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Attendance </strong>{"Pro_no"+Attendance.P_no} Attendance already Submited
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>:""}
+      {insert?<div id="hide1"className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Attendance </strong>{"Pro_no"+Attendance.P_no} successfully Submited
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>:""}
+      {fill?<div id="hide2"className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Can't be Blank Any Field</strong>{"Pro_no"+Attendance.P_no} successfully Submited
         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>:""}
       <div className='h1 text-center text-primary mt-2'>Today Attendance</div>
