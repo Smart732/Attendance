@@ -23,7 +23,7 @@ function App() {
 
     axios.request(options).then(function (response) {
       console.log(response.status);
-      if(response.status==245){
+      if(response.status===245){
         setiem({set:response.status})
         console.log(set)
       }
