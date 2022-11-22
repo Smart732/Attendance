@@ -15,7 +15,7 @@ function App() {
 
     const options = {
       method: 'POST',
-      url: 'http://localhost:4000/attendance/todayatt',
+      url: 'https://7yv9hj.deta.dev/att/todayatt',
       data: Attendance
     };
 
