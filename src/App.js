@@ -25,7 +25,7 @@ function App() {
     };
 
     axios.request(options).then(function (response) {
-      console.log(response.status);
+      // console.log(response.status);
       if (response.status === 211) {
         setiem(true)
         setTimeout(hide, 2000);
